@@ -32,11 +32,12 @@ func main() {
 
 	models.ConnectDataBase()
 
-	router.GET("/contacts", controllers.FindContacts)
-
 	router.GET("/", getHelloWorld)
 
-	router.Run()
+	router.GET("/contacts", controllers.FindContacts)
+	router.POST("/contact", controllers.CreateContact)
+
+	router.Run("localhost:3000")
 }
 
 func getHelloWorld(c *gin.Context) {

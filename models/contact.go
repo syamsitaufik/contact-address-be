@@ -5,6 +5,6 @@ package models
 type Contact struct {
 	ID          uint   `json:"id" gorm:"primary_key"`
 	Name        string `json:"name"`
-	PhoneNumber string `json:"PhoneNumber"`
-	Address     string `json:"Address"`
+	PhoneNumber string `json:"phoneNumber"`
+	Address     string `json:"address"`
 }
