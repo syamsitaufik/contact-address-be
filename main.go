@@ -35,7 +35,10 @@ func main() {
 	router.GET("/", getHelloWorld)
 
 	router.GET("/contacts", controllers.FindContacts)
-	router.POST("/contact", controllers.CreateContact)
+	router.GET("/contacts/:id", controllers.FindContact)
+	router.PUT("/contacts/:id", controllers.UpdateContact)
+	router.POST("/contacts", controllers.CreateContact)
+	router.DELETE("/contacts/:id", controllers.DeleteContact)
 
 	router.Run("localhost:3000")
 }
