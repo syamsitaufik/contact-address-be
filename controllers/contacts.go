@@ -41,8 +41,6 @@ func CreateContact(c *gin.Context) {
 
 	// Create Contact
 	contact := models.Contact{Name: input.Name, PhoneNumber: input.PhoneNumber, Address: input.Address}
-	// var contact models.Contact
-	// c.BindJSON(&input)
 	models.DB.Create(&contact)
 
 	c.JSON(http.StatusOK, gin.H{"data": contact})
@@ -61,7 +59,7 @@ func FindContact(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": contact})
 }
 
-// PATCH /contacts/:id
+// PUT /contacts/:id
 // Update a contact
 func UpdateContact(c *gin.Context) {
 	// Get model if exist
@@ -79,17 +77,17 @@ func UpdateContact(c *gin.Context) {
 		return
 	}
 
-	c.BindJSON(&contact)
+	// c.BindJSON(&input)
+	update_input := models.Contact{Name: input.Name, PhoneNumber: input.PhoneNumber, Address: input.Address}
+	models.DB.Model(&contact).Updates(update_input)
+	// models.DB.Save(&input)
 
-	// models.DB.Model(&contact).Updates(input)
-	models.DB.Save(&contact)
-
+	// send response and serialize contact struct to json
 	c.JSON(http.StatusOK, gin.H{"data": contact})
 }
 
 // DELETE /contacts/:id
 // Delete a contact
-
 func DeleteContact(c *gin.Context) {
 	// Get mode if exist
 	var contact models.Contact
